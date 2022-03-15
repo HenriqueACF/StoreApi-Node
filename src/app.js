@@ -1,8 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 const app = express()
 const router = express.Router()
+
+//CONECTA COM O BANCO
+mongoose.connect('mongodb+srv://henrique:123segurança@api.he2dg.mongodb.net/test\n');
 
 //IMPORTANDO AS ROTAS
 const indexRoutes = require('./routes/indexRoutes')
