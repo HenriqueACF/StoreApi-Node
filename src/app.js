@@ -8,6 +8,9 @@ const router = express.Router()
 //CONECTA COM O BANCO
 mongoose.connect('mongodb+srv://henrique:123segurança@api.he2dg.mongodb.net/test\n');
 
+//MODELS
+const Product = require('./models/product')
+
 //IMPORTANDO AS ROTAS
 const indexRoutes = require('./routes/indexRoutes')
 const productRoute = require('./routes/productRoute')
