@@ -2,6 +2,16 @@ const app = require('../src/app')
 const debug = require('debug')('node:serve');
 const http = require('http');
 
+const swaggerUi = require('swagger-ui-express'),
+    swaggerDocument = require('../src/routes/indexRoutes');
+
+//ROTA SWAGGER
+app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument)
+);
+
 const port = normalizePort(process.env.PORT || '3000')
 app.set('port', port);
 
