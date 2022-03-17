@@ -1,12 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const config = require('./config')
 
 const app = express()
 const router = express.Router()
 
 //CONECTA COM O BANCO
-mongoose.connect('mongodb+srv://henrique:123segurança@api.he2dg.mongodb.net/test\n');
+mongoose.connect(config.connectionString);
 
 //MODELS
 const Product = require('./models/product')
