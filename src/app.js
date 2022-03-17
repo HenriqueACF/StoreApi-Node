@@ -10,6 +10,8 @@ mongoose.connect('mongodb+srv://henrique:123segurança@api.he2dg.mongodb.net/tes
 
 //MODELS
 const Product = require('./models/product')
+const Customer = require('./models/customer')
+const Order = require('./models/order')
 
 //IMPORTANDO AS ROTAS
 const indexRoutes = require('./routes/indexRoutes')
