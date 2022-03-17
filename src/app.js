@@ -16,12 +16,14 @@ const Order = require('./models/order')
 //IMPORTANDO AS ROTAS
 const indexRoutes = require('./routes/indexRoutes')
 const productRoute = require('./routes/productRoute')
+const customerRoute = require('./routes/customerRoute')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
 app.use('/', indexRoutes)
 app.use('/products', productRoute)
+app.use('/customers', customerRoute)
 
 module.exports = app;
 
