@@ -19,6 +19,7 @@
     "md5": "^2.3.0",
     "mongoose": "^6.2.6",
     "nodemon": "^2.0.15",
+    "sendgrid": "^2.0.0",
     "swagger-autogen": "^2.19.0",
     "swagger-ui-express": "^4.3.0"
   }
