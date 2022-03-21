@@ -6,9 +6,9 @@ const authService = require('../service/auth-service')
 
 exports.post = async(req, res, next) => {
     let contract = new ValidationContract();
-    contract.hasMinLen(req.body.name, 3, 'O nome deve conter pelo menos 3 caracteres');
+    contract.hasMinLen(req.body.name, 6, 'O nome deve conter pelo menos 6 caracteres');
     contract.isEmail(req.body.email, 3, 'E-mail inválido');
-    contract.hasMinLen(req.body.password, 3, 'A senha deve conter pelo menos 6 caracteres');
+    contract.hasMinLen(req.body.password, 6, 'A senha deve conter pelo menos 6 caracteres');
 
     // Se os dados forem inválidos
     if (!contract.isValid()) {
@@ -56,6 +56,38 @@ exports.authenticate = async(req, res, next) => {
             data:{
                email: customer.email,
                password: customer.password
+            }
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({
+            message: 'Falha ao processar sua requisição'
+        });
+    }
+};
+
+exports.refreshToken = async(req, res, next) => {
+    try {
+        const token = req.body.token || req.query.token || req.headers['x-access-token']
+        const data = await authService.decodeToken(token)
+
+        const customer =await repository.getById(data.id)
+
+        if(!customer){
+            res.status(404).send({message:"Cliente não encontrado"});
+            return
+        }
+        const tokenData = await authService.generateToken({
+            id: customer._id,
+            email: customer.email,
+            name: customer.name
+        })
+
+        res.status(201).send({
+            token: token,
+            data:{
+                email: customer.email,
+                password: customer.password
             }
         });
     } catch (e) {
