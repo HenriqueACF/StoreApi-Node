@@ -20,8 +20,16 @@ const productRoute = require('./routes/productRoute')
 const customerRoute = require('./routes/customerRoute')
 const orderRoute = require('./routes/orderRoute')
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({
+    limit:'5mb'
+}))
 app.use(bodyParser.urlencoded({extended:false}))
+//HABILITA CORS
+app.use(function(req, res, nex){
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Acceps, x-access-token')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+})
 
 app.use('/', indexRoutes)
 app.use('/products', productRoute)
